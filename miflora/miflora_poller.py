@@ -113,7 +113,7 @@ class MiFloraPoller:
                 _HANDLE_READ_SENSOR_DATA,
                 format_bytes(self._cache),
             )
-            self._check_data()
+            # self._check_data()
             if self.cache_available():
                 self._last_read = datetime.now()
             else:
@@ -173,8 +173,10 @@ class MiFloraPoller:
                 or (self._last_read is None)
                 or (datetime.now() - self._cache_timeout > self._last_read)
             ):
+                # print("vio - not using cache")
                 self.fill_cache()
             else:
+                # print("vio - use cache")
                 _LOGGER.debug(
                     "Using cache (%s < %s)",
                     datetime.now() - self._last_read,
@@ -182,6 +184,7 @@ class MiFloraPoller:
                 )
 
         if self.cache_available() and (len(self._cache) == 16):
+            #print("vio - use filled cache")
             return self._parse_data()[parameter]
         if self.cache_available() and (self.is_ropot()):
             if parameter == MI_LIGHT:
