@@ -35,13 +35,22 @@ def poll(args):
     backend = _get_backend(args)
     poller = MiFloraPoller(args.mac, backend)
     print("Getting data from Mi Flora")
-    print(f"FW: {poller.firmware_version()}")
-    print(f"Name: {poller.name()}")
-    print("Temperature: {}".format(poller.parameter_value(MI_TEMPERATURE)))
-    print("Moisture: {}".format(poller.parameter_value(MI_MOISTURE)))
-    print("Light: {}".format(poller.parameter_value(MI_LIGHT)))
-    print("Conductivity: {}".format(poller.parameter_value(MI_CONDUCTIVITY)))
-    print("Battery: {}".format(poller.parameter_value(MI_BATTERY)))
+    #print(f"FW: {poller.firmware_version()}")
+    #print(f"Name: {poller.name()}")
+    #print("Temperature: {}".format(poller.parameter_value(MI_TEMPERATURE)))
+    #print("Moisture: {}".format(poller.parameter_value(MI_MOISTURE)))
+    #print("Light: {}".format(poller.parameter_value(MI_LIGHT)))
+    #print("Conductivity: {}".format(poller.parameter_value(MI_CONDUCTIVITY)))
+    #print("Battery: {}".format(poller.parameter_value(MI_BATTERY)))
+    result = {
+             "temperature": poller.parameter_value(MI_TEMPERATURE),
+             "moisture": poller.parameter_value(MI_MOISTURE),
+             "light": poller.parameter_value(MI_LIGHT),
+             "conductivity": poller.parameter_value(MI_CONDUCTIVITY),
+             "battery": poller.parameter_value(MI_BATTERY)
+             }
+    print(result)
+    return result 
 
 
 def scan(args):
