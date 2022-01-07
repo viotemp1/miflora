@@ -139,6 +139,8 @@ class MiFloraPoller:
         ):
             self._fw_last_read = datetime.now()
             with self._bt_interface.connect(self._mac) as connection:
+                for i in range(10):
+                    time.sleep(0.1)
                 res = connection.read_handle(
                     _HANDLE_READ_VERSION_BATTERY
                 )  # pylint: disable=no-member
