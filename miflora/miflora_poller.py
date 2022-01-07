@@ -104,7 +104,8 @@ class MiFloraPoller:
                         datetime.now() - self._cache_timeout + timedelta(seconds=300)
                     )
                     return
-            time.sleep(1)
+            for i in range(10):
+                time.sleep(0.1)
             self._cache = connection.read_handle(
                 _HANDLE_READ_SENSOR_DATA
             )  # pylint: disable=no-member
